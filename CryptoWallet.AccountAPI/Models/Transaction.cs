@@ -3,13 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CryptoWallet.WalletAPI.Models
 {
-    public enum TransactOpearation
-    {
-        Admission,  //поступление
-        Departure   //отправление
-    }
-
-    public class TransactionHistory
+    public class Transaction
     {
 
         public int Id { get; set; }

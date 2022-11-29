@@ -13,7 +13,7 @@ namespace CryptoWallet.WalletAPI.Repository
             _db = db;
         }
 
-        public async Task ChangeBalance(TransactionHistory transaction)
+        public async Task ChangeBalance(Transaction transaction)
         {
 
             var userBalanceRow1 = await GetBalanceByCoin(transaction.SenderId, transaction.Coin);

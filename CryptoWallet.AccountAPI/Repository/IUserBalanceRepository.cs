@@ -9,7 +9,7 @@ namespace CryptoWallet.WalletAPI.Repository
 
         Task<UserBalance> GetBalanceByCoin(int id, string coin);
 
-        Task ChangeBalance(TransactionHistory transaction);
+        Task ChangeBalance(Transaction transaction);
 
     }
 }

@@ -11,7 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserBalanceRepository, UserBalanceRepository>();
-builder.Services.AddScoped<ITransactHistoryRepository, TransactHistoryRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

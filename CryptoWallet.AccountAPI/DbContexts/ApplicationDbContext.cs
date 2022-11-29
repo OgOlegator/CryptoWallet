@@ -16,7 +16,7 @@ namespace CryptoWallet.WalletAPI.DbContexts
         
         public DbSet<UserBalance> UserBalances { get; set; }
 
-        public DbSet<TransactionHistory> History { get; set; }
+        public DbSet<Transaction> History { get; set; }
 
     }
 }

@@ -10,11 +10,11 @@ namespace CryptoWallet.WalletAPI.Controllers
     [Route("api/transaction")]
     public class TransactionController : ControllerBase
     {
-        private readonly ITransactHistoryRepository _historyRepository;
+        private readonly ITransactionRepository _historyRepository;
         private readonly IUserBalanceRepository _balanceRepository;
         protected ResponseDto _response;
 
-        public TransactionController(ITransactHistoryRepository historyRepository, IUserBalanceRepository balanceRepository)
+        public TransactionController(ITransactionRepository historyRepository, IUserBalanceRepository balanceRepository)
         {
             _historyRepository = historyRepository;
             _balanceRepository = balanceRepository;
@@ -45,7 +45,7 @@ namespace CryptoWallet.WalletAPI.Controllers
         {
             try
             {
-                var transaction = new TransactionHistory
+                var transaction = new Transaction
                 {
                     SenderId = int.Parse(senderId),
                     RecipientId = int.Parse(recipientId),
