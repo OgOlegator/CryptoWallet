@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoWallet.WalletAPI.Controllers
 {
+    //API для получения информации о балансе пользователя
     [Route("api/balance")]
     [ApiController]
     public class BalanceInfoController : ControllerBase
@@ -19,7 +20,7 @@ namespace CryptoWallet.WalletAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{userId}")]
         public async Task<ResponseDto> GetBalance(string userId)
         {
             try
@@ -37,7 +38,7 @@ namespace CryptoWallet.WalletAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id} {coin}")]
+        [Route("{userId} {coin}")]
         public async Task<ResponseDto> GetBalanceByCoin(string userId, string coin)
         {
             try

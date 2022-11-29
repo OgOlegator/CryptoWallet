@@ -20,12 +20,12 @@ namespace CryptoWallet.WalletAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<ResponseDto> GetUserInformation(string id)
+        [Route("{userId}")]
+        public async Task<ResponseDto> GetUserInformation(string userId)
         {
             try
             {
-                _response.Result = await _userRepository.GetById(int.Parse(id));
+                _response.Result = await _userRepository.GetById(int.Parse(userId));
             }
             catch (Exception ex)
             {
