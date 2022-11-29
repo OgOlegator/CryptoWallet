@@ -35,6 +35,8 @@ namespace CryptoWallet.WalletAPI.Repository
             else
             {
                 userBalanceRow2 = GetNewRowUserBalance(transaction.RecipientId, transaction.Coin);
+                userBalanceRow2.Count += transaction.Count;
+
                 _db.UserBalances.Add(userBalanceRow2);
             }
 

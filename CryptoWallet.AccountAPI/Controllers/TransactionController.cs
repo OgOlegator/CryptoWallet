@@ -21,6 +21,24 @@ namespace CryptoWallet.WalletAPI.Controllers
             _response = new ResponseDto();
         }
 
+        [HttpGet]
+        [Route("{userId}")]
+        public async Task<ResponseDto> GetHistory(string userId)
+        {
+            try
+            {
+                _response.Result = await _historyRepository.GetHistoryByUserId(int.Parse(userId));
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
+                _response.DisplayMessage = ex.Message;
+            }
+
+            return _response;
+        }
+
         [HttpPost]
         [Route("{senderId} {recipientId} {coin} {count}")]
         public async Task<ResponseDto> RunTransaction(string senderId, string recipientId, string coin, string count)

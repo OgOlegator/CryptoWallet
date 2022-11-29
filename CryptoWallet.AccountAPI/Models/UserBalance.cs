@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CryptoWallet.WalletAPI.Models
 {
-    [PrimaryKey(nameof(Id), nameof(UserId), nameof(Coin))]
+    [PrimaryKey(nameof(UserId), nameof(Coin))]
     public class UserBalance
     {
 
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         [Required]
         [Column(TypeName = "nvarchar(30)")]

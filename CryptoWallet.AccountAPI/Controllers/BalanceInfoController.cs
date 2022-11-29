@@ -1,31 +1,30 @@
-﻿using CryptoWallet.WalletAPI.Models;
-using CryptoWallet.WalletAPI.Models.Dto;
+﻿using CryptoWallet.WalletAPI.Models.Dto;
 using CryptoWallet.WalletAPI.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoWallet.WalletAPI.Controllers
 {
-    //API для работы с учетными данными пользователей
+    [Route("api/balance")]
     [ApiController]
-    [Route("api/account")]
-    public class AccountDataController : ControllerBase
+    public class BalanceInfoController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserBalanceRepository _balanceRepository;
         protected ResponseDto _response;
 
-        public AccountDataController(IUserRepository userRepository)
+        public BalanceInfoController(IUserBalanceRepository balanceRepository)
         {
-            _userRepository = userRepository;
+            _balanceRepository = balanceRepository;
             _response = new ResponseDto();
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ResponseDto> GetUserInformation(string id)
+        public async Task<ResponseDto> GetBalance(string userId)
         {
             try
             {
-                _response.Result = await _userRepository.GetById(int.Parse(id));
+                _response.Result = await _balanceRepository.GetUserBalance(int.Parse(userId));
             }
             catch (Exception ex)
             {
@@ -37,12 +36,13 @@ namespace CryptoWallet.WalletAPI.Controllers
             return _response;
         }
 
-        [HttpPost]
-        public async Task<ResponseDto> AddNewUser([FromBody] User user)
+        [HttpGet]
+        [Route("{id} {coin}")]
+        public async Task<ResponseDto> GetBalanceByCoin(string userId, string coin)
         {
             try
             {
-                _response.Result = await _userRepository.AddUser(user);
+                _response.Result = await _balanceRepository.GetBalanceByCoin(int.Parse(userId), coin);
             }
             catch (Exception ex)
             {
