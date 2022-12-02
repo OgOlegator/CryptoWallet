@@ -13,6 +13,7 @@ namespace CryptoWallet.WalletAPI.Controllers
         private readonly IUserBalanceRepository _balanceRepository;
         protected ResponseDto _response;
 
+        //todo добавить пополнение баланса
         public BalanceInfoController(IUserBalanceRepository balanceRepository)
         {
             _balanceRepository = balanceRepository;
@@ -44,6 +45,25 @@ namespace CryptoWallet.WalletAPI.Controllers
             try
             {
                 _response.Result = await _balanceRepository.GetBalanceByCoin(int.Parse(userId), coin);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
+                _response.DisplayMessage = ex.Message;
+            }
+
+            return _response;
+        }
+
+        [HttpPut]
+        [Route("{userId} {coin} {count}")]
+        public async Task<ResponseDto> IncreaseBalance(string userId, string coin, string count)
+        {
+            try
+            {
+                var userBalance = await _balanceRepository.IncreaseBalance(int.Parse(userId), coin, decimal.Parse(count));
+                _response.Result = userBalance;
             }
             catch (Exception ex)
             {

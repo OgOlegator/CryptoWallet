@@ -39,7 +39,7 @@ namespace CryptoWallet.WalletAPI.Controllers
             return _response;
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("{senderId} {recipientId} {coin} {count}")]
         public async Task<ResponseDto> RunTransaction(string senderId, string recipientId, string coin, string count)
         {
@@ -49,6 +49,7 @@ namespace CryptoWallet.WalletAPI.Controllers
                 RecipientId = int.Parse(recipientId),
                 Coin = coin,
                 Count = decimal.Parse(count),
+                Time = DateTime.Now,
                 Result = ResultTransaction.Completed
             };
 
@@ -61,7 +62,7 @@ namespace CryptoWallet.WalletAPI.Controllers
                 {
                     try
                     {
-                        await _balanceRepository.ChangeBalance(transaction);
+                        await _balanceRepository.ExecuteTransaction(transaction);
                         await _historyRepository.AddTransaction(transaction);
                     }
                     catch

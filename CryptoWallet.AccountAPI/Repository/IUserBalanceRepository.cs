@@ -9,9 +9,13 @@ namespace CryptoWallet.WalletAPI.Repository
 
         Task<UserBalance> GetBalanceByCoin(int userId, string coin);
 
-        Task ChangeBalance(Transaction transaction);
-
         bool CheckBalance(int userId, string coin, decimal changeValue);
+
+        Task<UserBalance> IncreaseBalance(int userId, string coin, decimal count);
+
+        Task<UserBalance> DecreaseBalance(int userId, string coin, decimal count);
+
+        Task<Transaction> ExecuteTransaction(Transaction transaction);
 
     }
 }

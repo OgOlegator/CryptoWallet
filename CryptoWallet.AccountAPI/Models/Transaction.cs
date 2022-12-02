@@ -29,6 +29,8 @@ namespace CryptoWallet.WalletAPI.Models
         [Column(TypeName = "decimal(18,12)")]
         public decimal Count { get; set; }
 
+        public DateTime Time { get; set; }
+
         public ResultTransaction Result { get; set; }
         
     }
