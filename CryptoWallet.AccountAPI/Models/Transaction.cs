@@ -3,9 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CryptoWallet.WalletAPI.Models
 {
+    public enum ResultTransaction
+    {
+        Completed,
+        Error
+    }
+
     public class Transaction
     {
-
         public int Id { get; set; }
 
         [Required]
@@ -24,5 +29,7 @@ namespace CryptoWallet.WalletAPI.Models
         [Column(TypeName = "decimal(18,12)")]
         public decimal Count { get; set; }
 
+        public ResultTransaction Result { get; set; }
+        
     }
 }

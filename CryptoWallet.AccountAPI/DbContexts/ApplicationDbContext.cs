@@ -18,5 +18,15 @@ namespace CryptoWallet.WalletAPI.DbContexts
 
         public DbSet<Transaction> History { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Transaction>()
+                .Property(e => e.Result)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (ResultTransaction)Enum.Parse(typeof(ResultTransaction), v));
+        }
+
     }
 }

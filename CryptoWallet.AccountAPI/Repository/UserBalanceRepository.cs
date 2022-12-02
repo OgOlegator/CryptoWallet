@@ -15,12 +15,11 @@ namespace CryptoWallet.WalletAPI.Repository
 
         public async Task ChangeBalance(Transaction transaction)
         {
-
             var userBalanceRow1 = await GetBalanceByCoin(transaction.SenderId, transaction.Coin);
             var userBalanceRow2 = await GetBalanceByCoin(transaction.RecipientId, transaction.Coin);
 
             //Изменение баланса отправителя
-            if (userBalanceRow1 == null || transaction.Count > userBalanceRow1.Count)
+            if (transaction.Count > userBalanceRow1.Count)
                 throw new Exception("На счете недостаточно средств");
 
             userBalanceRow1.Count -= transaction.Count;
@@ -50,26 +49,32 @@ namespace CryptoWallet.WalletAPI.Repository
             }
         }
 
-        public async Task<IEnumerable<UserBalance>> GetUserBalance(int id)
-        {
-            return await _db.UserBalances.Where(rowBalance => rowBalance.UserId == id).ToListAsync();
-        }
+        public async Task<IEnumerable<UserBalance>> GetUserBalance(int userId)
+            => await _db.UserBalances.Where(rowBalance => rowBalance.UserId == userId).ToListAsync();
 
-        public async Task<UserBalance> GetBalanceByCoin(int id, string coin)
+        public async Task<UserBalance> GetBalanceByCoin(int userId, string coin)
         {
-            return await _db.UserBalances
-                .FirstOrDefaultAsync(
-                    rowBalance =>
-                    rowBalance.UserId == id
-                    && rowBalance.Coin == coin);
-        }
+            var balance = await _db.UserBalances.FirstOrDefaultAsync(
+                                rowBalance =>
+                                rowBalance.UserId == userId
+                                && rowBalance.Coin == coin);
 
-        public UserBalance GetNewRowUserBalance(int id, string coin)
+            return balance != null ? balance : new UserBalance { UserId = userId, Coin = coin, Count = 0 };
+        }
+        
+        public UserBalance GetNewRowUserBalance(int userId, string coin)
             => new UserBalance
             {
-                UserId = id,
+                UserId = userId,
                 Coin = coin,
                 Count = 0
             };
+
+        public bool CheckBalance(int userId, string coin, decimal changeValue)
+        {
+            var balance = GetBalanceByCoin(userId, coin);
+
+            return balance.Result.Count >= changeValue;
+        }
     }
 }

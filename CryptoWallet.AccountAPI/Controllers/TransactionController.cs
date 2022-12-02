@@ -43,24 +43,42 @@ namespace CryptoWallet.WalletAPI.Controllers
         [Route("{senderId} {recipientId} {coin} {count}")]
         public async Task<ResponseDto> RunTransaction(string senderId, string recipientId, string coin, string count)
         {
+            var transaction = new Transaction
+            {
+                SenderId = int.Parse(senderId),
+                RecipientId = int.Parse(recipientId),
+                Coin = coin,
+                Count = decimal.Parse(count),
+                Result = ResultTransaction.Completed
+            };
+
             try
             {
-                var transaction = new Transaction
-                {
-                    SenderId = int.Parse(senderId),
-                    RecipientId = int.Parse(recipientId),
-                    Coin = coin,
-                    Count = decimal.Parse(count),
-                };
+                if(!_balanceRepository.CheckBalance(transaction.SenderId, transaction.Coin, transaction.Count))
+                    throw new Exception("Недостаточно средств");
 
-                await _balanceRepository.ChangeBalance(transaction);
-                _response.Result = await _historyRepository.AddTransaction(transaction);
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        await _balanceRepository.ChangeBalance(transaction);
+                        await _historyRepository.AddTransaction(transaction);
+                    }
+                    catch
+                    {
+                        transaction.Result = ResultTransaction.Error;
+                        await _historyRepository.AddTransaction(transaction);
+                    }
+                });
             }
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.ErrorMessages = new List<string> { ex.ToString() };
                 _response.DisplayMessage = ex.Message;
+
+                transaction.Result = ResultTransaction.Error;
+                await _historyRepository.AddTransaction(transaction);
             }
 
             return _response;
