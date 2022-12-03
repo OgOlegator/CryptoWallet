@@ -104,7 +104,7 @@ namespace CryptoWallet.WalletAPI.Repository
 
                 Task.WaitAll();
 
-                transactionDb.Commit();
+                await transactionDb.CommitAsync();
             };
 
             return transaction;
