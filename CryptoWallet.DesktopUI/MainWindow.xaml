@@ -5,18 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoWallet.DesktopUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="363*"/>
-            <RowDefinition Height="71*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="39*"/>
-            <ColumnDefinition Width="41*"/>
-        </Grid.ColumnDefinitions>
-        <Button Content="Главная" Margin="223,7,24,6" Grid.Row="1"/>
-        <Button Grid.Column="1" Content="История операций" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.538,0.263" Grid.Row="1" Height="58" Width="144"/>
+        Title="CryptoWallet" Height="600" Width="920"
+        WindowStyle="none"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
 
-    </Grid>
+    <Border Background="#272537"
+            CornerRadius="20">
+        <Grid HorizontalAlignment="Center" Width="920">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="CryptoWallet"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="22" 
+                       Margin="20,0,0,0"/>
+
+            <StackPanel Grid.Row="1">
+                
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14" 
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+                <RadioButton Content="History"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14" 
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+                <RadioButton Content="Transfer coins"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14" 
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+            </StackPanel>
+
+            <TextBox Width="250"
+                     Height="40"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="5"
+                     Grid.Column="1"
+                     Style="{StaticResource ModernTextBox}"/>
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"/>
+
+        </Grid>
+
+
+    </Border>
+
 </Window>
