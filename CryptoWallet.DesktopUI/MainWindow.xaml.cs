@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptoWallet.DesktopUI.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,21 @@ namespace CryptoWallet.DesktopUI
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            //MainViewModel.ChangePage(MainViewModel.Pages.Home);
+        }
+
+        private void HistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TransferButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
