@@ -25,20 +25,5 @@ namespace CryptoWallet.DesktopUI
         {
             InitializeComponent();
         }
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            //MainViewModel.ChangePage(MainViewModel.Pages.Home);
-        }
-
-        private void HistoryButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TransferButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CryptoWallet.DesktopUI.MVVM.View"
+             xmlns:local="clr-namespace:CryptoWallet.DesktopUI.MVVM.View" 
+             xmlns:viewmodel="clr-namespace:CryptoWallet.DesktopUI.MVVM.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:HomeViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="700">
     <StackPanel>
@@ -21,7 +23,18 @@
                   Foreground="White" 
                   BorderBrush="#FFF4F5F9" 
                   FontSize="16" 
-                  ItemsSource="{Binding Mode=OneWay}">
+                  ItemsSource="{Binding Balances}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" 
+                                   Text="{Binding Path=Coin}"/>
+                        <TextBlock  Text="{Binding Path=Count}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
         </ListView>
 
     </StackPanel>

@@ -43,21 +43,21 @@
                              Foreground="White"
                              FontSize="14" 
                              Style="{StaticResource MenuButtonTheme}"
-                             Click="HomeButton_Click"/>
+                             Command="{Binding SelectPageHome}"/>
 
                 <RadioButton Content="History"
                              Height="50"
                              Foreground="White"
                              FontSize="14" 
                              Style="{StaticResource MenuButtonTheme}"
-                             Click="HistoryButton_Click"/>
+                             Command="{Binding SelectPageHistory}"/>
 
                 <RadioButton Content="Transfer coins"
                              Height="50"
                              Foreground="White"
                              FontSize="14" 
                              Style="{StaticResource MenuButtonTheme}"
-                             Click="TransferButton_Click"/>
+                             Command="{Binding SelectPageTransfer}"/>
 
             </StackPanel>
 
