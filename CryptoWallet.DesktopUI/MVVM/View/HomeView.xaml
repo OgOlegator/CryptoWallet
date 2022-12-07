@@ -23,14 +23,15 @@
                   Foreground="White" 
                   BorderBrush="#FFF4F5F9" 
                   FontSize="16" 
-                  ItemsSource="{Binding Balances}">
+                  ItemsSource="{Binding Balances}" 
+                  SelectionMode="Single">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
                         <TextBlock FontSize="18" 
                                    Text="{Binding Path=Coin}"/>
-                        <TextBlock  Text="{Binding Path=Count}"/>
+                        <TextBlock Text="{Binding Path=Count}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

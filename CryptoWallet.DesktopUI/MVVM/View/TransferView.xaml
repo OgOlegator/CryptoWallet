@@ -44,7 +44,7 @@
                  Margin="5"
                  Style="{StaticResource ModernTextBox}"
                  Name="TextBoxCoin"
-                 Text="{Binding Coin}"/>
+                 Text="{Binding Coin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Count"
                    Foreground="White"
